@@ -15,6 +15,12 @@ import 'features/authentication/domain/usecases/sign_in_use_case.dart';
 import 'features/authentication/domain/usecases/sign_up_use_case.dart';
 import 'features/authentication/domain/usecases/verify_email_use_case.dart';
 import 'features/authentication/ui/cubit/auth_cubit.dart';
+import 'features/movies/data/data_sources/local_data_source/movie_local_data_source.dart';
+import 'features/movies/data/data_sources/local_data_source/movie_local_data_source_impl.dart';
+import 'features/movies/data/data_sources/remote_data_source/movie_remote_data_source.dart';
+import 'features/movies/data/data_sources/remote_data_source/movie_remote_data_source_impl.dart';
+import 'features/movies/data/repositories/movie_repository_impl.dart';
+import 'features/movies/domain/repositories/movie_repository.dart';
 import 'network/check_network/network_info.dart';
 import 'network/check_network/network_info_impl.dart';
 
@@ -54,5 +60,12 @@ Future<void> init() async {
 //! External
 
   sl.registerLazySingleton(() => InternetConnection());
+
+
+  ///movie
+  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl());
+
+  sl.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(sl(), sl(), sl()));
 
 }
