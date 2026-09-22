@@ -11,7 +11,11 @@ abstract class ApiServices {
   factory ApiServices(Dio dio, {String baseUrl}) = _ApiServices;
 
   @GET("list_movies.json")
-  Future<MoviesListResponse> getMoviesList(@Query("page") int page);
+  Future<MoviesListResponse> getMoviesList(
+      @Query("page") int page,
+      @Query("genre") String? genre,
+      @Query("sort_by") String? sortBy,
+      );
 
   @GET("movie_details.json")
   Future<MovieDetailsResponse> getMovieDetails(@Query("movie_id") int movieID);

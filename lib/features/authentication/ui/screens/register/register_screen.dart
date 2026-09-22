@@ -1,10 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // استيراد البلوك
-// تأكد من استيراد مسارات الـ Cubit والـ State والـ Entity الخاصة بك
-// import '../../../../../features/authentication/presentation/bloc/auth_cubit.dart';
-// import '../../../../../features/authentication/domain/entities/sign_up_entity.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/assets/app_assets.dart';
 import '../../../../../core/utils/colors/app_colors.dart';
 import '../../../../../core/utils/icons/app_icons.dart';

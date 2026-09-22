@@ -23,9 +23,18 @@ class _ApiServices implements ApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MoviesListResponse> getMoviesList(int page) async {
+  Future<MoviesListResponse> getMoviesList(
+    int page,
+    String? genre,
+    String? sortBy,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'genre': genre,
+      r'sort_by': sortBy,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MoviesListResponse>(

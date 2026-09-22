@@ -14,4 +14,6 @@ class AppIcons {
   static const String search = 'assets/icons/search.png';
   static const String profile = 'assets/icons/Profiel.png';
   static const String password = 'assets/icons/password.png';
+  static const String explore = 'assets/icons/explore.png';
+
 }

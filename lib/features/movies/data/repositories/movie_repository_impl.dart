@@ -33,6 +33,7 @@ class MovieRepositoryImpl extends MovieRepository{
       return SuccessApiResult(data: movieDetailsEntity);
 
     }catch(e){
+      print("////////////////////////////////////////the error is $e///////////////////////////////");
       return FailureApiResult(ServerError());
     }
 
@@ -51,16 +52,17 @@ class MovieRepositoryImpl extends MovieRepository{
 
       return SuccessApiResult(data: movieSuggestions);
     }catch(e){
+      print("////////////////////////////////////////the error is $e///////////////////////////////");
       return FailureApiResult(ServerError());
     }
   }
 
   @override
-  Future<ApiResult<List<MovieEntity>>> getMoviesList({int page = 1}) async{
+  Future<ApiResult<List<MovieEntity>>> getMoviesList({int page = 1 , String? genre , String? sortBy}) async{
     final String cacheKey = "movies_list_page_$page";
     if(await networkInfo.isConnected){
       try{
-        var response = await movieRemoteDataSource.getMoviesList(page: page);
+        var response = await movieRemoteDataSource.getMoviesList(page: page , genre: genre, sortBy: sortBy,);
         List<MovieEntity> movieList = response.movies?.movies?.map((movieModel){
           return MovieEntity(
             id: movieModel.id ?? 0,
@@ -81,6 +83,7 @@ class MovieRepositoryImpl extends MovieRepository{
         return SuccessApiResult(data: movieList);
 
       }catch(e){
+        print("////////////////////////////////////////the error is $e///////////////////////////////");
         return FailureApiResult(ServerError());
       }
 
@@ -100,6 +103,7 @@ class MovieRepositoryImpl extends MovieRepository{
           return FailureApiResult(NetworkError());
         }
       }catch(e){
+        print("////////////////////////////////////////the error is $e///////////////////////////////");
         return FailureApiResult(ServerError());
       }
     }

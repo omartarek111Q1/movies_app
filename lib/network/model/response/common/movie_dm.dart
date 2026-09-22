@@ -39,7 +39,7 @@ class MovieDM {
     titleLong = json['title_long'];
     slug = json['slug'];
     year = json['year'];
-    rating = json['rating'];
+    rating = (json['rating'] as num).toDouble();
     runtime = json['runtime'];
     genres = json['genres'] != null ? json['genres'].cast<String>() : [];
     summary = json['summary'];

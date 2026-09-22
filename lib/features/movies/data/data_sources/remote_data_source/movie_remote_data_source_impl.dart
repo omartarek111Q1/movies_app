@@ -1,3 +1,4 @@
+import 'package:movies_app/network/api_result.dart';
 import 'package:movies_app/network/model/response/movie_details/movie_details_response.dart';
 
 import 'package:movies_app/network/model/response/movies_list/movies_list_response.dart';
@@ -16,8 +17,8 @@ MovieRemoteDataSourceImpl(this._apiServices);
   }
 
   @override
-  Future<MoviesListResponse> getMoviesList({int page = 1}) {
-    return _apiServices.getMoviesList(page);
+  Future<MoviesListResponse> getMoviesList({int page = 1 , String? genre , String? sortBy})async {
+    return _apiServices.getMoviesList(page, genre, sortBy);
   }
 
   @override
