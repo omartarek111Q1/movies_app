@@ -6,7 +6,7 @@ class GetMoviesListUseCase {
   final MovieRepository repository;
   GetMoviesListUseCase(this.repository);
 
-  Future<ApiResult<List<MovieEntity>>> call({int page = 1 , String? genre , String? sortBy}){
-    return repository.getMoviesList(page: page, genre: genre, sortBy: sortBy );
+  Future<ApiResult<List<MovieEntity>>> call({int page = 1 , String? genre , String? sortBy , String? queryTerm}){
+    return repository.getMoviesList(page: page, genre: genre, sortBy: sortBy , queryTerm: queryTerm );
   }
 }

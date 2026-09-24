@@ -19,6 +19,8 @@ class HomeCubit extends Cubit<HomeState> {
 
     var apiResult = await _getMoviesListUseCase.call(page: 1 ,sortBy: 'year');
 
+    if (isClosed) return;
+
     if (apiResult.isSuccess) {
       emit(state.copyWith(
         availableNowMovies: Resource.success(apiResult.getData() ?? []),

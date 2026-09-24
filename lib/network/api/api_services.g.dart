@@ -27,12 +27,14 @@ class _ApiServices implements ApiServices {
     int page,
     String? genre,
     String? sortBy,
+    String? queryTerm,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'genre': genre,
       r'sort_by': sortBy,
+      r'query_term': queryTerm,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

@@ -6,7 +6,6 @@ import '../../../../../core/utils/icons/app_icons.dart';
 import '../../../../../core/utils/routes/app_routes.dart';
 import '../../../../../core/widgets/custom_btn.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
-import '../../../../profile/profile_screen.dart';
 import '../../../domain/entity/sign_in_entity.dart';
 import '../../cubit/auth_cubit.dart';
 
@@ -36,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is SignedInState || state is GoogleSignInState) {
-              Navigator.pushReplacement(context, AppRoutes.profile);
+              Navigator.pushReplacement(context, AppRoutes.emailVerifier);
             } else if (state is ErrorAuthState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.message), backgroundColor: Colors.red),
@@ -142,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     inColor: AppColors.yellow,
                     title: 'Login With Google',
                     titleColor: AppColors.black,
-                    prefixIcon: AppIcons.rating,
+                    prefixIcon: AppIcons.google,
                     borderColor: Colors.transparent,
                     onTap: () {
                       // استدعاء دالة جوجل من الـ Cubit

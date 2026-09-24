@@ -17,8 +17,8 @@ MovieRemoteDataSourceImpl(this._apiServices);
   }
 
   @override
-  Future<MoviesListResponse> getMoviesList({int page = 1 , String? genre , String? sortBy})async {
-    return _apiServices.getMoviesList(page, genre, sortBy);
+  Future<MoviesListResponse> getMoviesList({int page = 1 , String? genre , String? sortBy , String? queryTerm})async {
+    return _apiServices.getMoviesList(page, genre, sortBy , queryTerm);
   }
 
   @override

@@ -15,6 +15,8 @@ abstract class ApiServices {
       @Query("page") int page,
       @Query("genre") String? genre,
       @Query("sort_by") String? sortBy,
+      @Query("query_term") String? queryTerm,
+
       );
 
   @GET("movie_details.json")

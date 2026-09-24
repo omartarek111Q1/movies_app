@@ -28,7 +28,7 @@ class VerifyEmailScreen extends StatelessWidget {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is EmailIsVerifiedState) {
-            Navigator.pushReplacement(context, AppRoutes.profile);
+            Navigator.pushReplacement(context, AppRoutes.mainLayOut);
           } else if (state is ErrorAuthState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message), backgroundColor: Colors.red),

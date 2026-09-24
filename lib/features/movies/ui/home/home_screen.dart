@@ -10,6 +10,8 @@ import 'package:movies_app/features/movies/ui/home/home_cubit/home_state.dart';
 import 'package:movies_app/injection_container.dart';
 import 'package:movies_app/network/resource.dart';
 
+import '../browse/browse_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -88,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Image.asset(AppAssets.availableNow, height: 90),
                         const SizedBox(height: 16),
                         _buildAvailableNowSection(state),
-                        
+
                         const SizedBox(height: 24),
                         // Watch Now Section
                         Image.asset(AppAssets.watchNow, height: 140),
@@ -176,12 +178,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Text(
-                'See More >',
-                style: TextStyle(
-                  color: AppColors.yellow,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+              InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BrowseScreen(seeMoreGenre: 'Action'),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'See More >',
+                  style: TextStyle(
+                    color: AppColors.yellow,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ],
@@ -246,12 +258,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Text(
-                'See More >',
-                style: TextStyle(
-                  color: AppColors.yellow,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+              InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BrowseScreen(seeMoreGenre: 'Comedy'),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'See More >',
+                  style: TextStyle(
+                    color: AppColors.yellow,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ],

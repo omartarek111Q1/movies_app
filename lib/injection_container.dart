@@ -3,6 +3,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:movies_app/features/movies/ui/browse/cubit/browse_cubit.dart';
 import 'features/authentication/data/data_sources/remote_data_source/auth_remote_data_source.dart';
 import 'features/authentication/data/data_sources/remote_data_source/auth_remote_data_source_impl.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
@@ -23,6 +24,7 @@ import 'features/movies/data/repositories/movie_repository_impl.dart';
 import 'features/movies/domain/repositories/movie_repository.dart';
 import 'features/movies/domain/usecases/get_movies_list_use_case.dart';
 import 'features/movies/ui/home/home_cubit/home_cubit.dart';
+import 'features/movies/ui/search/cubit/search_cubit.dart';
 import 'network/api/api_services.dart';
 import 'network/check_network/network_info.dart';
 import 'network/check_network/network_info_impl.dart';
@@ -90,4 +92,8 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => GetMoviesListUseCase(sl()));
   sl.registerFactory(() => HomeCubit(sl()));
+
+  sl.registerFactory(() => SearchCubit(sl()));
+  sl.registerFactory(() => BrowseCubit(sl()));
+
 }
