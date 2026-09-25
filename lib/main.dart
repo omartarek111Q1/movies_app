@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ void main() async {
  await Hive.initFlutter();
  Hive.registerAdapter(MovieLocalModelAdapter());
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseAuth.instance.setLanguageCode('en');
   await init();
   runApp(
     BlocProvider(create: ((context) => sl<AuthCubit>()), child: const MyApp()),

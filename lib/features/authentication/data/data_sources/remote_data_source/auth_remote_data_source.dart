@@ -9,4 +9,9 @@ abstract class AuthRemoteDataSource {
   Future<UserCredential> googleAuthentication();
 
   Future<Unit> verifyEmail();
+
+  Future<void> updateProfile({required String name , required String profileImage , required String phone});
+  Future<void> resetPassword();
+  Future<void> deleteAccount();
+
 }

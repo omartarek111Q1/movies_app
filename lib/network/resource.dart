@@ -14,4 +14,9 @@ class Resource<T> {
   factory Resource.success(T data) => Resource._(status: ResourceStatus.success, data: data);
 
   factory Resource.error(String errorMessage) => Resource._(status: ResourceStatus.error, errorMessage: errorMessage);
+
+  bool get isInitial => status == ResourceStatus.initial;
+  bool get isLoading => status == ResourceStatus.loading;
+  bool get isSuccess => status == ResourceStatus.success;
+  bool get isError => status == ResourceStatus.error;
 }

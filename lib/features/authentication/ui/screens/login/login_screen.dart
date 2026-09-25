@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/assets/app_assets.dart';
@@ -34,8 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
-            if (state is SignedInState || state is GoogleSignInState) {
-              Navigator.pushReplacement(context, AppRoutes.emailVerifier);
+            if (state is SignedInState) {
+              final user = FirebaseAuth.instance.currentUser;
+              if (user != null && !user.emailVerified) {
+                context.read<AuthCubit>().sendEmailVerification();
+                Navigator.pushReplacement(context, AppRoutes.emailVerifier);
+              } else {
+                Navigator.pushReplacement(context, AppRoutes.mainLayOut);
+              }
+            } else if (state is GoogleSignInState) {
+              Navigator.pushReplacement(context, AppRoutes.mainLayOut);
             } else if (state is ErrorAuthState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.message), backgroundColor: Colors.red),

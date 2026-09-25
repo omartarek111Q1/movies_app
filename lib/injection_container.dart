@@ -7,13 +7,16 @@ import 'package:movies_app/features/movies/ui/browse/cubit/browse_cubit.dart';
 import 'features/authentication/data/data_sources/remote_data_source/auth_remote_data_source.dart';
 import 'features/authentication/data/data_sources/remote_data_source/auth_remote_data_source_impl.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
+import 'features/authentication/domain/usecases/delete_account_use_case.dart';
 import 'features/authentication/domain/usecases/first_page_use_case.dart';
 import 'features/authentication/domain/repositories/authentication_repository.dart';
 import 'features/authentication/domain/usecases/check_verification_use_case.dart';
 import 'features/authentication/domain/usecases/google_auth_use_case.dart';
 import 'features/authentication/domain/usecases/logout_use_case.dart';
+import 'features/authentication/domain/usecases/reset_password_use_case.dart';
 import 'features/authentication/domain/usecases/sign_in_use_case.dart';
 import 'features/authentication/domain/usecases/sign_up_use_case.dart';
+import 'features/authentication/domain/usecases/update_profile_use_case.dart';
 import 'features/authentication/domain/usecases/verify_email_use_case.dart';
 import 'features/authentication/ui/cubit/auth_cubit.dart';
 import 'features/movies/data/data_sources/local_data_source/movie_local_data_source.dart';
@@ -24,6 +27,7 @@ import 'features/movies/data/repositories/movie_repository_impl.dart';
 import 'features/movies/domain/repositories/movie_repository.dart';
 import 'features/movies/domain/usecases/get_movies_list_use_case.dart';
 import 'features/movies/ui/home/home_cubit/home_cubit.dart';
+import 'features/movies/ui/profile/cubit/edit_profile_cubit.dart';
 import 'features/movies/ui/search/cubit/search_cubit.dart';
 import 'network/api/api_services.dart';
 import 'network/check_network/network_info.dart';
@@ -48,6 +52,14 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CheckVerificationUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
   sl.registerLazySingleton(() => GoogleAuthUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateProfileUseCase(sl()));
+  sl.registerLazySingleton(() => ResetPasswordUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteAccountUseCase(sl()));
+  sl.registerFactory(() => EditProfileCubit(
+    sl(),
+    sl(),
+    sl(),
+  ));
 
 // Repository
 

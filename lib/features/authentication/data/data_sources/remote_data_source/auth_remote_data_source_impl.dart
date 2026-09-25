@@ -172,4 +172,46 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource{
     return Future.value(unit);
   }
 
+  @override
+  Future<void> deleteAccount() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).delete();
+        await user.delete();
+      } catch (e) {
+        throw Exception("Failed to delete account completely: $e");
+      }
+    }
+  }
+
+  @override
+  Future<void> resetPassword() async {
+    final email = FirebaseAuth.instance.currentUser?.email;
+    if(email != null){
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    }else {
+      throw Exception("No email found for current user");
+    }
+  }
+
+  @override
+  Future<void> updateProfile({required String name, required String profileImage , required String phone}) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      await user.updateDisplayName(name);
+      await user.updatePhotoURL(profileImage);
+
+
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+        'name': name,
+        'avatar': profileImage,
+        'phone': phone,
+      });
+    }
+
+  }
+
+
+
 }

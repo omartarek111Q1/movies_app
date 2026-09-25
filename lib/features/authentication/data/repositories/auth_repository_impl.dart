@@ -9,6 +9,7 @@ import 'package:movies_app/features/authentication/domain/entity/first_page_enti
 import 'package:movies_app/features/authentication/domain/entity/sign_in_entity.dart';
 import 'package:movies_app/features/authentication/domain/entity/sign_up_entity.dart';
 import 'package:movies_app/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:movies_app/network/api_result.dart';
 import '../../../../network/auth_errors/exceptions.dart';
 import '../../../../network/auth_errors/failure.dart';
 
@@ -74,7 +75,7 @@ class AuthRepositoryImpl implements AuthenticationRepository{
     if (await networkInfo.isConnected) {
       try {
         // GoogleSignIn _googleSignIn = GoogleSignIn();
-        // await _googleSignIn.signOut();
+        await GoogleSignIn().signOut();
         await FirebaseAuth.instance.signOut();
         return const Right(unit);
       } catch (e) {
@@ -149,11 +150,42 @@ class AuthRepositoryImpl implements AuthenticationRepository{
       return Left(OfflineFailure());
     }else{
       try{
+        await GoogleSignIn().signOut();
         final userCredential = await authRemoteDataSource.googleAuthentication();
         return Right(userCredential) ;
       }on ServerException {
         return Left(ServerFailure());
       }
+    }
+  }
+
+  @override
+  Future<ApiResult<void>> deleteAccount()async {
+    try {
+      await authRemoteDataSource.deleteAccount();
+      return SuccessApiResult(data: null);
+    } catch (e) {
+      return FailureApiResult(Errors(e.toString()));
+    }
+  }
+
+  @override
+  Future<ApiResult<void>> resetPassword() async {
+    try {
+      await authRemoteDataSource.resetPassword();
+      return SuccessApiResult(data: null);
+    } catch (e) {
+      return FailureApiResult(Errors(e.toString()));
+    }
+  }
+
+  @override
+  Future<ApiResult<void>> updateProfile({required String name, required String profileImage, required String phone})async {
+    try {
+      await authRemoteDataSource.updateProfile(name: name, profileImage: profileImage, phone: phone);
+      return SuccessApiResult(data: null);
+    } catch (e) {
+      return FailureApiResult(Errors(e.toString()));
     }
   }
 }

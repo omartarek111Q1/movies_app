@@ -8,6 +8,7 @@ import '../../../features/authentication/ui/screens/onboarding/onboarding_main_s
 import '../../../features/authentication/ui/screens/onboarding/onboarding_screens.dart';
 import '../../../features/authentication/ui/screens/register/register_screen.dart';
 import '../../../features/authentication/ui/screens/splash_screen/splash_screen.dart';
+import '../../../features/movies/ui/profile/edit_profile_screen.dart';
 
 
 class AppRoutes {
@@ -20,6 +21,7 @@ class AppRoutes {
   static MaterialPageRoute get forgetPassword => MaterialPageRoute(builder: (_) => ForgetPasswordScreen());
   static MaterialPageRoute get emailVerifier => MaterialPageRoute(builder: (_) => VerifyEmailScreen());
   static MaterialPageRoute get mainLayOut => MaterialPageRoute(builder: (_) => MainLayout());
+  static MaterialPageRoute get editProfile => MaterialPageRoute(builder: (_) => EditProfileScreen());
 
 
 
