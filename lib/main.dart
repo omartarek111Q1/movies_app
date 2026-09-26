@@ -41,7 +41,9 @@ class MyApp extends StatelessWidget {
           if (state is SignedInPageState) {
             return const MainLayout();
           } else {
-            return const  LoginScreen();
+            // return const  LoginScreen();
+            return const MainLayout();
+
 
           }
         },
