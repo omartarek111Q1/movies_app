@@ -19,4 +19,6 @@ abstract class AuthenticationRepository {
   Future<ApiResult<void>> updateProfile({required String name, required String profileImage , required String phone});
   Future<ApiResult<void>> resetPassword();
   Future<ApiResult<void>> deleteAccount();
+  Future<ApiResult<void>> forgetPassword({ required String email});
+
 }

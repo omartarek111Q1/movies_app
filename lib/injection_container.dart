@@ -11,6 +11,7 @@ import 'features/authentication/domain/usecases/delete_account_use_case.dart';
 import 'features/authentication/domain/usecases/first_page_use_case.dart';
 import 'features/authentication/domain/repositories/authentication_repository.dart';
 import 'features/authentication/domain/usecases/check_verification_use_case.dart';
+import 'features/authentication/domain/usecases/forget_password_use_case.dart';
 import 'features/authentication/domain/usecases/google_auth_use_case.dart';
 import 'features/authentication/domain/usecases/logout_use_case.dart';
 import 'features/authentication/domain/usecases/reset_password_use_case.dart';
@@ -19,6 +20,7 @@ import 'features/authentication/domain/usecases/sign_up_use_case.dart';
 import 'features/authentication/domain/usecases/update_profile_use_case.dart';
 import 'features/authentication/domain/usecases/verify_email_use_case.dart';
 import 'features/authentication/ui/cubit/auth_cubit.dart';
+import 'features/authentication/ui/screens/forget_password/cubit/forget_password_cubit.dart';
 import 'features/movies/data/data_sources/local_data_source/movie_local_data_source.dart';
 import 'features/movies/data/data_sources/local_data_source/movie_local_data_source_impl.dart';
 import 'features/movies/data/data_sources/remote_data_source/movie_remote_data_source.dart';
@@ -108,4 +110,6 @@ Future<void> init() async {
   sl.registerFactory(() => SearchCubit(sl()));
   sl.registerFactory(() => BrowseCubit(sl()));
 
+  sl.registerLazySingleton(() => ForgetPasswordUseCase(sl()));
+  sl.registerFactory(() => ForgetPasswordCubit(sl()));
 }

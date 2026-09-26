@@ -188,4 +188,16 @@ class AuthRepositoryImpl implements AuthenticationRepository{
       return FailureApiResult(Errors(e.toString()));
     }
   }
+
+  @override
+  Future<ApiResult<void>> forgetPassword({required String email}) async {
+    try{
+      await authRemoteDataSource.forgetPassword(email: email);
+      return SuccessApiResult(data: null);
+    }catch(e){
+      return FailureApiResult(Errors(e.toString()));
+    }
+  }
+
+
 }

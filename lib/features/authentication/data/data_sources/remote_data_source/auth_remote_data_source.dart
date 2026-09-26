@@ -13,5 +13,7 @@ abstract class AuthRemoteDataSource {
   Future<void> updateProfile({required String name , required String profileImage , required String phone});
   Future<void> resetPassword();
   Future<void> deleteAccount();
+  Future<void> forgetPassword({required String email});
+
 
 }

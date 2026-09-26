@@ -72,12 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                   ),
                   const SizedBox(height: 18),
-                  InkWell(
-                    onTap: () {
-                      // TODO: Navigate to Forget Password Screen
-                    },
-                    child: Align(
-                      alignment: Alignment.centerRight,
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, AppRoutes.forgetPassword);
+                      },
                       child: Text(
                         'Forget Password ?',
                         style: TextStyle(

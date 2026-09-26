@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movies_app/features/authentication/ui/cubit/auth_cubit.dart';
+import 'package:movies_app/features/authentication/ui/screens/forget_password/forget_password_screen.dart';
 import 'package:movies_app/features/authentication/ui/screens/onboarding/onboarding_screens.dart';
 import 'package:movies_app/features/authentication/ui/screens/verify_email/verify_email_screen.dart';
 import 'package:movies_app/features/movies/data/models/local/movie_local_model_adapter.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
             return const MainLayout();
           } else {
             return const  LoginScreen();
+
           }
         },
       ),
