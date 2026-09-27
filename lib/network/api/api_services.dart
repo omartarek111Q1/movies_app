@@ -19,7 +19,7 @@ abstract class ApiServices {
 
       );
 
-  @GET("movie_details.json")
+  @GET("movie_details.json?with_images=true&with_cast=true")
   Future<MovieDetailsResponse> getMovieDetails(@Query("movie_id") int movieID);
 
   @GET("movie_suggestions.json")
@@ -27,3 +27,5 @@ abstract class ApiServices {
     @Query("movie_id") int movieID,
   );
 }
+
+

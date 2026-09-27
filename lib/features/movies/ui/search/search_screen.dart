@@ -123,6 +123,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       return MovieCard(
                                         imageUrl: movie.image,
                                         rating: movie.rating,
+                                        movieId: movie.id ?? 0,
                                       );
                                     },
                                   ),

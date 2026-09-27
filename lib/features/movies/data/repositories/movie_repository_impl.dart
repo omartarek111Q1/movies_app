@@ -27,19 +27,10 @@ class MovieRepositoryImpl extends MovieRepository {
         movieID: movieID,
       );
       var movieModel = response.movieDetails?.movie;
-      var movieDetailsEntity = MovieDetailsEntity(
-        id: movieModel?.id ?? 0,
-        image: movieModel?.backgroundImage ?? "",
-        title: movieModel?.title ?? "",
-        year: movieModel?.year ?? 0,
-        rating: movieModel?.rating ?? 0.0,
-        runtime: movieModel?.runtime ?? 0,
-        summary: movieModel?.descriptionFull ?? "",
-        genres: movieModel?.genres ?? [],
-        screenShots: [],
-        cast: [],
-      );
-      return SuccessApiResult(data: movieDetailsEntity);
+      if (movieModel == null) {
+        return FailureApiResult(ServerError());
+      }
+      return SuccessApiResult(data: movieModel.toDetailsEntity());
     } catch (e) {
       print(
         "////////////////////////////////////////the error is $e///////////////////////////////",
@@ -209,3 +200,4 @@ class MovieRepositoryImpl extends MovieRepository {
     }
   }
 }
+

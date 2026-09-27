@@ -36,18 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          if (state is SignedInPageState) {
-            return const MainLayout();
-          } else {
-            // return const  LoginScreen();
-            return const MainLayout();
-
-
-          }
-        },
-      ),
+      home: SplashScreen(),
     );
   }
 }

@@ -141,6 +141,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                                 return MovieCard(
                                   imageUrl: movie.image,
                                   rating: movie.rating,
+                                  movieId: movie.id ?? 0,
                                 );
                               },
                             ),

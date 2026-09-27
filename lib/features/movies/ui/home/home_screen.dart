@@ -143,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return MovieCard(
             imageUrl: movie.image,
             rating: movie.rating,
+            movieId: movie.id ?? 0,
           );
         },
         options: CarouselOptions(
@@ -231,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: MovieCard(
                       imageUrl: movie.image,
                       rating: movie.rating,
+                      movieId: movie.id ?? 0,
                     ),
                   ),
                 );
@@ -311,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: MovieCard(
                         imageUrl: movie.image,
                         rating: movie.rating,
+                        movieId: movie.id ?? 0,
                       ),
                     ),
                   );

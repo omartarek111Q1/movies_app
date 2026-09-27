@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:movies_app/features/movies/ui/browse/cubit/browse_cubit.dart';
+import 'package:movies_app/features/movies/ui/profile/cubit/profile_cubit.dart';
 import 'features/authentication/data/data_sources/remote_data_source/auth_remote_data_source.dart';
 import 'features/authentication/data/data_sources/remote_data_source/auth_remote_data_source_impl.dart';
 import 'features/authentication/data/repositories/auth_repository_impl.dart';
@@ -25,12 +26,21 @@ import 'features/movies/data/data_sources/local_data_source/movie_local_data_sou
 import 'features/movies/data/data_sources/local_data_source/movie_local_data_source_impl.dart';
 import 'features/movies/data/data_sources/remote_data_source/movie_remote_data_source.dart';
 import 'features/movies/data/data_sources/remote_data_source/movie_remote_data_source_impl.dart';
+import 'features/movies/data/data_sources/remote_data_source/user_actions/UserActionsRemoteDataSource.dart';
+import 'features/movies/data/data_sources/remote_data_source/user_actions/user_actions_remote_data_source_impl.dart';
 import 'features/movies/data/repositories/movie_repository_impl.dart';
+import 'features/movies/data/repositories/user_actions_repository_impl.dart';
 import 'features/movies/domain/repositories/movie_repository.dart';
+import 'features/movies/domain/repositories/user_actions_repository.dart';
+import 'features/movies/domain/usecases/book_mark_use_case.dart';
+import 'features/movies/domain/usecases/favorite_use_case.dart';
 import 'features/movies/domain/usecases/get_movies_list_use_case.dart';
 import 'features/movies/ui/home/home_cubit/home_cubit.dart';
 import 'features/movies/ui/profile/cubit/edit_profile_cubit.dart';
 import 'features/movies/ui/search/cubit/search_cubit.dart';
+import 'features/movies/domain/usecases/get_movie_details_use_case.dart';
+import 'features/movies/domain/usecases/get_movie_suggestions_use_case.dart';
+import 'features/movies/ui/movie_details/cubit/movie_details_cubit.dart';
 import 'network/api/api_services.dart';
 import 'network/check_network/network_info.dart';
 import 'network/check_network/network_info_impl.dart';
@@ -105,11 +115,25 @@ Future<void> init() async {
 
 
   sl.registerLazySingleton(() => GetMoviesListUseCase(sl()));
+  sl.registerLazySingleton(() => GetMovieDetailsUseCase(sl()));
+  sl.registerLazySingleton(() => GetMovieSuggestionsUseCase(sl()));
+  sl.registerLazySingleton<UserActionsRemoteDataSource>(
+          () => UserActionsRemoteDataSourceImpl());
+  sl.registerLazySingleton<UserActionsRepository>(
+          () => UserActionsRepositoryImpl(sl()));
+
+  sl.registerLazySingleton(() => FavoriteUseCase(sl()));
+  sl.registerLazySingleton(() => BookMarkUseCase(sl()));
+
   sl.registerFactory(() => HomeCubit(sl()));
+  sl.registerFactory(() => MovieDetailsCubit(sl(), sl(), sl(), sl()));
 
   sl.registerFactory(() => SearchCubit(sl()));
   sl.registerFactory(() => BrowseCubit(sl()));
+  sl.registerFactory(() => ProfileCubit(sl() , sl() ));
+
 
   sl.registerLazySingleton(() => ForgetPasswordUseCase(sl()));
   sl.registerFactory(() => ForgetPasswordCubit(sl()));
 }
+

@@ -20,5 +20,7 @@ class AppAssets {
   static const String forgotPassword = 'assets/images/Forgot_password.png';
   static const String availableNow = 'assets/images/available_now.png';
   static const String watchNow = 'assets/images/watch_now.png';
+  static const String watch = 'assets/images/watch.png';
+
 
 }

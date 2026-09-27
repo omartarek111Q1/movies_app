@@ -70,7 +70,7 @@ class _ApiServices implements ApiServices {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'movie_details.json',
+            'movie_details.json?with_images=true&with_cast=true',
             queryParameters: queryParameters,
             data: _data,
           )

@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'cast_dm.dart';
+import 'package:movies_app/features/movies/domain/entity/movie_entity.dart';
+import 'package:movies_app/features/movies/domain/entity/movie_details_entity.dart';
 
 MovieDM moviesFromJson(String str) => MovieDM.fromJson(json.decode(str));
 String moviesToJson(MovieDM data) => json.encode(data.toJson());
@@ -28,7 +31,11 @@ class MovieDM {
       this.largeCoverImage, 
       this.state, 
       this.dateUploaded,
-      this.dateUploadedUnix,});
+      this.dateUploadedUnix,
+      this.mediumScreenshotImage1,
+      this.mediumScreenshotImage2,
+      this.mediumScreenshotImage3,
+      this.cast,});
 
   MovieDM.fromJson(dynamic json) {
     id = json['id'];
@@ -56,6 +63,15 @@ class MovieDM {
     state = json['state'];
     dateUploaded = json['date_uploaded'];
     dateUploadedUnix = json['date_uploaded_unix'];
+    mediumScreenshotImage1 = json['medium_screenshot_image1'];
+    mediumScreenshotImage2 = json['medium_screenshot_image2'];
+    mediumScreenshotImage3 = json['medium_screenshot_image3'];
+    if (json['cast'] != null) {
+      cast = [];
+      json['cast'].forEach((v) {
+        cast?.add(CastDM.fromJson(v));
+      });
+    }
   }
   int? id;
   String? url;
@@ -82,6 +98,10 @@ class MovieDM {
   String? state;
   String? dateUploaded;
   int? dateUploadedUnix;
+  String? mediumScreenshotImage1;
+  String? mediumScreenshotImage2;
+  String? mediumScreenshotImage3;
+  List<CastDM>? cast;
 MovieDM copyWith({  int? id,
   String? url,
   String? imdbCode,
@@ -160,7 +180,44 @@ MovieDM copyWith({  int? id,
     map['state'] = state;
     map['date_uploaded'] = dateUploaded;
     map['date_uploaded_unix'] = dateUploadedUnix;
+    map['medium_screenshot_image1'] = mediumScreenshotImage1;
+    map['medium_screenshot_image2'] = mediumScreenshotImage2;
+    map['medium_screenshot_image3'] = mediumScreenshotImage3;
+    if (cast != null) {
+      map['cast'] = cast?.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 
+  MovieEntity toEntity() {
+    return MovieEntity(
+      id: id ?? 0,
+      image: largeCoverImage ?? mediumCoverImage ?? '',
+      rating: rating ?? 0.0,
+    );
+  }
+
+  MovieDetailsEntity toDetailsEntity() {
+    return MovieDetailsEntity(
+      id: id ?? 0,
+      image: largeCoverImage ?? mediumCoverImage ?? '',
+      title: title ?? '',
+      year: year ?? 0,
+      rating: rating ?? 0.0,
+      runtime: runtime ?? 0,
+      screenShots: [
+        if (mediumScreenshotImage1 != null) mediumScreenshotImage1!,
+        if (mediumScreenshotImage2 != null) mediumScreenshotImage2!,
+        if (mediumScreenshotImage3 != null) mediumScreenshotImage3!,
+      ],
+      summary: descriptionFull ?? summary ?? '',
+      genres: genres ?? [],
+      cast: cast?.map((e) => e.toEntity()).toList() ?? [],
+    );
+  }
+
 }
+
+
+
+
