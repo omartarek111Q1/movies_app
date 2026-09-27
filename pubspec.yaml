@@ -51,6 +51,7 @@ dependencies:
   hive: ^2.2.3
   cached_network_image: ^4.0.1
   shared_preferences: ^2.5.5
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   build_runner: ^2.16.1
   retrofit_generator: ^10.2.11
+  flutter_launcher_icons: ^0.14.4
 
 
 
@@ -108,3 +110,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "assets/icons/app_icon.png" # مسار صورتك
+    # لو حابب تعمل لون خلفية للأيقونة (اختياري)
+    # adaptive_icon_background: "#000000"
+    # adaptive_icon_foreground: "assets/icons/app_icon.png"
