@@ -262,52 +262,58 @@ class MovieDetailsScreen extends StatelessWidget {
                         itemCount: state.similarMovies.data!.length,
                         itemBuilder: (context, index) {
                           final similar = state.similarMovies.data![index];
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Stack(
-                              children: [
-                                Image.network(
-                                  similar.image,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                                Positioned(
-                                  top: 8,
-                                  left: 8,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 6,
-                                      vertical: 2,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.black.withValues(
-                                        alpha: 0.54,
+                          return InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailsScreen(movieId: similar.id)));
+
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Stack(
+                                children: [
+                                  Image.network(
+                                    similar.image,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Positioned(
+                                    top: 8,
+                                    left: 8,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
                                       ),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          similar.rating.toString(),
-                                          style: TextStyle(
-                                            color: AppColors.white.withValues(
-                                              alpha: 0.7,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.black.withValues(
+                                          alpha: 0.54,
+                                        ),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            similar.rating.toString(),
+                                            style: TextStyle(
+                                              color: AppColors.white.withValues(
+                                                alpha: 0.7,
+                                              ),
+                                              fontSize: 12,
                                             ),
-                                            fontSize: 12,
                                           ),
-                                        ),
-                                        const SizedBox(width: 4),
-                                        const Icon(
-                                          Icons.star,
-                                          color: AppColors.yellow,
-                                          size: 12,
-                                        ),
-                                      ],
+                                          const SizedBox(width: 4),
+                                          const Icon(
+                                            Icons.star,
+                                            color: AppColors.yellow,
+                                            size: 12,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
